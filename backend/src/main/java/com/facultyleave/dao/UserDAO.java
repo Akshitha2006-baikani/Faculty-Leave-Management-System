@@ -109,6 +109,108 @@ public class UserDAO {
         }
     }
 
+
+
+    // Register a faculty user and initialize leave balances
+    public boolean registerFacultyWithBalance(User user) {
+
+        String insertUserSql =
+                "INSERT INTO users " +
+                "(name, email, password, role, department_id) " +
+                "VALUES (?, ?, ?, 'FACULTY', ?)";
+
+        String insertBalanceSql =
+                "INSERT INTO leave_balance " +
+                "(user_id, leave_type_id, remaining_days) " +
+                "SELECT ?, leave_type_id, total_days " +
+                "FROM leave_types";
+
+        Connection connection = null;
+
+        try {
+            connection = DBConnection.getConnection();
+
+            // Start transaction
+            connection.setAutoCommit(false);
+
+            int userId;
+
+            // 1. Create faculty account
+            try (PreparedStatement statement =
+                         connection.prepareStatement(
+                                 insertUserSql,
+                                 java.sql.Statement.RETURN_GENERATED_KEYS)) {
+
+                statement.setString(1, user.getName());
+                statement.setString(2, user.getEmail());
+                statement.setString(3, user.getPassword());
+                statement.setInt(4, user.getDepartmentId());
+
+                int rows = statement.executeUpdate();
+
+                if (rows == 0) {
+                    connection.rollback();
+                    return false;
+                }
+
+                try (ResultSet generatedKeys =
+                             statement.getGeneratedKeys()) {
+
+                    if (!generatedKeys.next()) {
+                        connection.rollback();
+                        return false;
+                    }
+
+                    userId = generatedKeys.getInt(1);
+                    user.setUserId(userId);
+                }
+            }
+
+            // 2. Initialize all leave balances
+            try (PreparedStatement statement =
+                         connection.prepareStatement(insertBalanceSql)) {
+
+                statement.setInt(1, userId);
+
+                int balanceRows = statement.executeUpdate();
+
+                if (balanceRows == 0) {
+                    connection.rollback();
+                    return false;
+                }
+            }
+
+            // 3. Everything succeeded
+            connection.commit();
+            return true;
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+            if (connection != null) {
+                try {
+                    connection.rollback();
+                } catch (SQLException rollbackException) {
+                    rollbackException.printStackTrace();
+                }
+            }
+
+            return false;
+
+        } finally {
+
+            if (connection != null) {
+                try {
+                    connection.setAutoCommit(true);
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     // Convert database result into User object
     private User createUserFromResultSet(ResultSet resultSet)
             throws SQLException {
