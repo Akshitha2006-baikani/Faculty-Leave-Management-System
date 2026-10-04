@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Faculty Leave Management Portal | Vardhaman College of Engineering</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+
+</head>
+
+<body>
+
+<div class="page-wrapper">
+
+    <!-- Left Branding Section -->
+    <section class="branding-section">
+
+        <div class="branding-content">
+
+            <div class="college-badge">
+                VCE
+            </div>
+
+            <p class="college-label">
+                VARDHAMAN COLLEGE OF ENGINEERING
+            </p>
+
+            <h1>
+                Faculty Leave<br>
+                Management Portal
+            </h1>
+
+            <p class="branding-description">
+                A centralized platform for managing faculty leave
+                applications, approvals, balances, and notifications.
+            </p>
+
+            <div class="portal-features">
+
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>Easy Leave Application</span>
+                </div>
+
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>Digital Approval Workflow</span>
+                </div>
+
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>Leave Balance Tracking</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="branding-footer">
+            Faculty • HOD • Administration
+        </div>
+
+    </section>
+
+
+    <!-- Right Login Section -->
+    <section class="login-section">
+
+        <div class="login-card">
+
+            <div class="mobile-brand">
+                <div class="college-badge small">
+                    VCE
+                </div>
+
+                <span>
+                    Vardhaman College of Engineering
+                </span>
+            </div>
+
+            <div class="login-header">
+
+                <p class="welcome-text">
+                    Welcome back
+                </p>
+
+                <h2>
+                    Sign in to your account
+                </h2>
+
+                <p class="login-description">
+                    Enter your college credentials to continue.
+                </p>
+
+            </div>
+
+
+            <form action="login" method="post">
+
+                <div class="form-group">
+
+                    <label for="email">
+                        College Email
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">✉</span>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email address"
+                            autocomplete="email"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <div class="password-label-row">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                    </div>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">●</span>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required>
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            onclick="togglePassword()"
+                            aria-label="Show or hide password">
+                            Show
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <button type="submit" class="login-button">
+
+                    <span>Sign In</span>
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </button>
+
+            </form>
+
+
+            <div id="error-message" class="error-message"></div>
+
+
+            <div class="login-footer">
+
+                <p>
+                    Faculty Leave Management System
+                </p>
+
+                <span>
+                    Secure • Simple • Efficient
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<script>
+
+    /* Password visibility */
+
+    function togglePassword() {
+
+        const password =
+            document.getElementById("password");
+
+        const button =
+            document.querySelector(".password-toggle");
+
+        if (password.type === "password") {
+
+            password.type = "text";
+            button.textContent = "Hide";
+
+        } else {
+
+            password.type = "password";
+            button.textContent = "Show";
+
+        }
+    }
+
+
+    /* Login error messages */
+
+    const params =
+        new URLSearchParams(window.location.search);
+
+    const error =
+        params.get("error");
+
+    const errorMessage =
+        document.getElementById("error-message");
+
+
+    if (error === "empty") {
+
+        errorMessage.textContent =
+            "Please enter your email and password.";
+
+    } else if (error === "invalid") {
+
+        errorMessage.textContent =
+            "Invalid email or password.";
+
+    } else if (error === "role") {
+
+        errorMessage.textContent =
+            "Your account has an invalid role. Please contact administration.";
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

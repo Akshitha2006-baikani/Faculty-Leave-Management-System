@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Apply for Leave | Faculty Leave Management System</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+
+        <!-- Header -->
+        <header class="dashboard-header">
+
+            <div>
+                <h1>Apply for Leave</h1>
+                <p>Vardhaman College of Engineering</p>
+            </div>
+
+            <button
+                class="logout-button"
+                onclick="window.location.href='faculty-dashboard.html'">
+                Back to Dashboard
+            </button>
+
+        </header>
+
+
+        <!-- Main Content -->
+        <main class="dashboard-content">
+
+            <section class="welcome-card">
+
+                <h2>Submit Leave Application</h2>
+
+                <p>
+                    Fill in the details below to submit your leave request.
+                    Your application will be sent to the concerned HOD for approval.
+                </p>
+
+            </section>
+
+
+            <!-- Leave Form -->
+            <section class="leave-form-card">
+
+                <form id="leaveForm"
+                      action="apply-leave"
+                      method="post">
+
+                    <!-- Leave Type -->
+                    <div class="form-group">
+
+                        <label for="leaveType">
+                            Leave Type
+                        </label>
+
+                        <select
+                            id="leaveType"
+                            name="leaveType"
+                            required>
+
+                            <option value="">
+                                Select leave type
+                            </option>
+
+                            <option value="CASUAL">
+                                Casual Leave
+                            </option>
+
+                            <option value="SICK">
+                                Sick Leave
+                            </option>
+
+                            <option value="EARNED">
+                                Earned Leave
+                            </option>
+
+                            <option value="ON_DUTY">
+                                On Duty
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Dates -->
+                    <div class="date-grid">
+
+                        <div class="form-group">
+
+                            <label for="startDate">
+                                Start Date
+                            </label>
+
+                            <input
+                                type="date"
+                                id="startDate"
+                                name="startDate"
+                                required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="endDate">
+                                End Date
+                            </label>
+
+                            <input
+                                type="date"
+                                id="endDate"
+                                name="endDate"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Reason -->
+                    <div class="form-group">
+
+                        <label for="reason">
+                            Reason for Leave
+                        </label>
+
+                        <textarea
+                            id="reason"
+                            name="reason"
+                            rows="6"
+                            maxlength="500"
+                            placeholder="Enter the reason for your leave..."
+                            required></textarea>
+
+                    </div>
+
+
+                    <!-- Buttons -->
+                    <div class="form-actions">
+
+                        <button
+                            type="button"
+                            class="cancel-button"
+                            onclick="window.location.href='faculty-dashboard.html'">
+                            Cancel
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="submit-button">
+                            Submit Application
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <script>
+
+        const startDate =
+            document.getElementById("startDate");
+
+        const endDate =
+            document.getElementById("endDate");
+
+
+        /*
+         * Prevent selecting a past start date
+         */
+
+        const today =
+            new Date().toISOString().split("T")[0];
+
+        startDate.min = today;
+        endDate.min = today;
+
+
+        /*
+         * Keep end date after start date
+         */
+
+        startDate.addEventListener("change", function () {
+
+            endDate.min = startDate.value;
+
+            if (endDate.value < startDate.value) {
+                endDate.value = "";
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>

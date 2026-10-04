@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Application Submitted | Faculty Leave Management System</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+
+        <!-- Header -->
+        <header class="dashboard-header">
+
+            <div>
+                <h1>Application Submitted</h1>
+                <p>Vardhaman College of Engineering</p>
+            </div>
+
+            <button
+                class="logout-button"
+                onclick="window.location.href='faculty-dashboard.html'">
+                Dashboard
+            </button>
+
+        </header>
+
+
+        <!-- Main Content -->
+        <main class="dashboard-content">
+
+            <section class="leave-form-card success-card">
+
+                <div class="success-icon">
+                    ✓
+                </div>
+
+                <h2>Leave Application Submitted Successfully</h2>
+
+                <p>
+                    Your leave application has been submitted successfully
+                    to the concerned HOD for approval.
+                </p>
+
+                <div class="status-box">
+
+                    <span class="status-label">
+                        Application Status
+                    </span>
+
+                    <span class="status-pending">
+                        PENDING APPROVAL
+                    </span>
+
+                </div>
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="cancel-button"
+                        onclick="window.location.href='faculty-dashboard.html'">
+                        Back to Dashboard
+                    </button>
+
+                    <button
+                        type="button"
+                        class="submit-button"
+                        onclick="window.location.href='my-applications'">
+                        View My Applications
+                    </button>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>
