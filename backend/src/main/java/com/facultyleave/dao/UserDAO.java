@@ -42,8 +42,20 @@ public class UserDAO {
     // Find a user by email
     public User findByEmail(String email) {
 
-        String sql = "SELECT user_id, name, email, password, role, department_id "
-                   + "FROM users WHERE email = ?";
+        String sql =
+        "SELECT "
+        + "u.user_id, "
+        + "u.name, "
+        + "u.designation, "
+        + "u.email, "
+        + "u.password, "
+        + "u.role, "
+        + "u.department_id, "
+        + "d.department_name "
+        + "FROM users u "
+        + "LEFT JOIN departments d "
+        + "ON u.department_id = d.department_id "
+        + "WHERE u.email = ?";
 
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -67,8 +79,20 @@ public class UserDAO {
     // Find a user by ID
     public User findById(int userId) {
 
-        String sql = "SELECT user_id, name, email, password, role, department_id "
-                   + "FROM users WHERE user_id = ?";
+        String sql =
+        "SELECT "
+        + "u.user_id, "
+        + "u.name, "
+        + "u.designation, "
+        + "u.email, "
+        + "u.password, "
+        + "u.role, "
+        + "u.department_id, "
+        + "d.department_name "
+        + "FROM users u "
+        + "LEFT JOIN departments d "
+        + "ON u.department_id = d.department_id "
+        + "WHERE u.user_id = ?";
 
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -219,6 +243,10 @@ public class UserDAO {
 
         user.setUserId(resultSet.getInt("user_id"));
         user.setName(resultSet.getString("name"));
+        user.setDesignation(resultSet.getString("designation"));
+        user.setDepartmentName(
+        resultSet.getString("department_name")
+);
         user.setEmail(resultSet.getString("email"));
         user.setPassword(resultSet.getString("password"));
         user.setRole(resultSet.getString("role"));

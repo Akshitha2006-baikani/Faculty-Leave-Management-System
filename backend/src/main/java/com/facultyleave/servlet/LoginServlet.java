@@ -45,9 +45,11 @@ public class LoginServlet extends HttpServlet {
 
             session.setAttribute("userId", user.getUserId());
             session.setAttribute("userName", user.getName());
+            session.setAttribute("userDesignation", user.getDesignation());
             session.setAttribute("userEmail", user.getEmail());
             session.setAttribute("userRole", user.getRole());
             session.setAttribute("departmentId", user.getDepartmentId());
+            session.setAttribute("departmentName", user.getDepartmentName());
 
             // Redirect based on role
             if ("FACULTY".equals(user.getRole())) {
@@ -56,7 +58,7 @@ public class LoginServlet extends HttpServlet {
 
             } else if ("HOD".equals(user.getRole())) {
 
-                response.sendRedirect("hod-dashboard.html");
+                response.sendRedirect("hod-dashboard.jsp");
 
             } else if ("ADMIN".equals(user.getRole())) {
 

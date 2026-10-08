@@ -4,6 +4,9 @@ public class LeaveApplication {
 
     private int leaveId;
     private int userId;
+    private String facultyName;
+    private String designation;
+    private String departmentName;
     private String leaveType;
     private String startDate;
     private String endDate;
@@ -30,6 +33,30 @@ public class LeaveApplication {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+
+    public String getFacultyName() {
+    return facultyName;
+}
+
+public void setFacultyName(String facultyName) {
+    this.facultyName = facultyName;
+}
+
+public String getDesignation() {
+    return designation;
+}
+
+public void setDesignation(String designation) {
+    this.designation = designation;
+}
+
+public String getDepartmentName() {
+    return departmentName;
+}
+
+public void setDepartmentName(String departmentName) {
+    this.departmentName = departmentName;
+}
 
     public String getLeaveType() {
         return leaveType;
