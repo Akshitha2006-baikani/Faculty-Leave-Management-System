@@ -33,7 +33,7 @@
             <p>Department Leave Applications</p>
         </div>
 
-        <a href="hod-dashboard.html" class="logout-button">
+        <a href="hod-dashboard.jsp" class="logout-button">
             Back to Dashboard
         </a>
 
